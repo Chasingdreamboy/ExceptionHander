@@ -7,11 +7,36 @@
 //
 
 #import "ERICYAppDelegate.h"
+#import <ExceptionHander/ExceptionHander-umbrella.h>
+
+@interface Person : NSObject
++ (void)sayHello;
+- (void)sayHello;
+
+@end
+@implementation Person
+
+
+
+@end
+
+
 
 @implementation ERICYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [UnrecognizedSelectorHandler start];
+    
+    Person *person = [[Person alloc] init];
+    [Person sayHello];
+    [person sayHello];
+    
+    
+    
+    
+    
     // Override point for customization after application launch.
     return YES;
 }
