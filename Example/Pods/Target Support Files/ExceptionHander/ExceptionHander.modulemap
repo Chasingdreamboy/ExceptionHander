@@ -1,0 +1,6 @@
+framework module ExceptionHander {
+  umbrella header "ExceptionHander-umbrella.h"
+
+  export *
+  module * { export * }
+}

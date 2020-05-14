@@ -1,0 +1,22 @@
+{
+  "name": "ExceptionHander",
+  "version": "0.1.0",
+  "summary": "A short description of ExceptionHander.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Chasingdreamboy/ExceptionHander",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Chasingdreamboy": "wangerdong@treefinance.com.cn"
+  },
+  "source": {
+    "git": "https://github.com/Chasingdreamboy/ExceptionHander.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ExceptionHander/Classes/**/*"
+}
