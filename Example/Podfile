@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'ExceptionHander_Example' do
+  pod 'ExceptionHander', :path => '../'
+
+  target 'ExceptionHander_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
