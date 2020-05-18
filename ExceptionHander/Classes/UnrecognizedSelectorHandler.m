@@ -27,9 +27,10 @@
 NSMethodSignature * (*ori_meta_methodSignatureForSelector)(id self, SEL _cmd, SEL aSelector);
 NSMethodSignature * (*ori_methodSignatureForSelector)(id self, SEL _cmd, SEL aSelector);
 NSMethodSignature * methodSignatureForSelector(id self, SEL _cmd, SEL aSelector) {
-    Class class = [self class];
+    Class class = object_getClass(self);
     if (class_isMetaClass(class)) {
         //类方法
+        NSLog(@"类签名");
         NSMethodSignature *signature = ori_meta_methodSignatureForSelector(self, _cmd, aSelector);
         if (signature) {
             //若类方法已经实现则直接返回
@@ -37,6 +38,7 @@ NSMethodSignature * methodSignatureForSelector(id self, SEL _cmd, SEL aSelector)
         }
     } else {
         //实例方法
+        NSLog(@"实例签名");
         NSMethodSignature *signature = ori_methodSignatureForSelector(self, _cmd, aSelector);
         if (signature) {
             //若实例方法已经实现则直接返回
@@ -51,13 +53,15 @@ void (*ori_meta_forwardInvocation)(id self, SEL _cmd, NSInvocation * anInvocatio
 //保存普通类中的forwardInvocation实现
 void (*ori_forwardInvocation)(id self, SEL _cmd, NSInvocation * anInvocation);
 void ds_forwardInvocation(id self, SEL _cmd, NSInvocation * anInvocation) {
-    Class class = [anInvocation.target class];
+    Class class = object_getClass(anInvocation.target);
     BOOL existImp = class_respondsToSelector(anInvocation.class, anInvocation.selector);
     if (class_isMetaClass(class)) {
         if (existImp && ori_meta_forwardInvocation) {
             ori_meta_forwardInvocation(self, _cmd, anInvocation);
         } else {
             //元类，类方法
+            
+            NSLog(@"类方法\n[%@]-[%@]", anInvocation.target, NSStringFromSelector(anInvocation.selector));
             anInvocation.target = [ExceptionHandler class];
             anInvocation.selector = @selector(noSelector);
             [anInvocation invoke];
@@ -66,6 +70,7 @@ void ds_forwardInvocation(id self, SEL _cmd, NSInvocation * anInvocation) {
         if (existImp && ori_forwardInvocation) {
             ori_forwardInvocation(self, _cmd, anInvocation);
         } else {
+            NSLog(@"实例方法\n[%@]-[%@]", anInvocation.target, NSStringFromSelector(anInvocation.selector));
             id obj = [[ExceptionHandler alloc] init];
             anInvocation.target = obj;
             anInvocation.selector = @selector(noSelector);

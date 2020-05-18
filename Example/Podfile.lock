@@ -1,0 +1,27 @@
+PODS:
+  - ExceptionHander (0.1.0)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+
+DEPENDENCIES:
+  - ExceptionHander (from `../`)
+  - FBSnapshotTestCase
+
+SPEC REPOS:
+  trunk:
+    - FBSnapshotTestCase
+
+EXTERNAL SOURCES:
+  ExceptionHander:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ExceptionHander: 52ecfc788ae1919145438a7a9ac70aa0031054f5
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+
+PODFILE CHECKSUM: a566c087f27eee2a030d0bbe091388cabc16ea4c
+
+COCOAPODS: 1.9.1
